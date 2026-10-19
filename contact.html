@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Contact Novel Solutions Corporation about semiconductor test engineering and technical services." />
+    <meta name="theme-color" content="#f3f7ff" />
+    <script>document.documentElement.classList.add("is-loading");</script>
+    <title>Contact Us | Novel Solutions Corporation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="assets/novel-solutions-logo.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="preloader" role="status" aria-live="polite" aria-label="Loading Novel Solutions">
+      <img class="preloader-logo" src="assets/novel-solutions-logo.png" alt="" aria-hidden="true" />
+      <span class="preloader-track" aria-hidden="true"><span></span></span>
+    </div>
+    <header class="site-header" id="top">
+      <nav class="nav-wrap container" aria-label="Main navigation">
+        <a class="brand" href="index.html" aria-label="Novel Solutions home">
+          <img class="brand-logo" src="assets/novel-solutions-mark.png" alt="" aria-hidden="true" />
+          <span>Novel Solutions Corporation</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-panel" id="primary-navigation">
+          <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="engineering.html">Engineering</a>
+            <a href="faq.html">FAQ</a>
+          </div>
+          <a class="button button-small button-outline nav-cta nav-current" href="contact.html" aria-current="page">Contact Us <span aria-hidden="true">↗</span></a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="contact-page-hero">
+        <div class="container contact-page-hero-inner">
+          <span class="eyebrow"><span class="eyebrow-dot"></span> START A CONVERSATION</span>
+          <h1>Let’s talk about<br /><span>what you’re building.</span></h1>
+          <p>Share your contact details and our team can follow up about your semiconductor test engineering needs.</p>
+        </div>
+      </section>
+      <section class="contact-section">
+        <div class="container contact-layout">
+          <aside class="contact-aside">
+            <span class="eyebrow">NOVEL SOLUTIONS CORPORATION</span>
+            <h2>Good work starts<br />with a <span>conversation.</span></h2>
+            <p>Whether you’re exploring a test program or working through a specific engineering challenge, tell us how to reach you.</p>
+            <div class="contact-aside-note">
+              <span class="contact-note-icon" aria-hidden="true">↗</span>
+              <span><strong>What happens next?</strong><small>Your email app will open with your details ready to send to our team.</small></span>
+            </div>
+            <a class="contact-email-link" href="mailto:info@novelsolutions.com">info@novelsolutions.com <span aria-hidden="true">↗</span></a>
+          </aside>
+          <form class="contact-form" id="contact-form">
+            <div class="form-heading">
+              <span class="eyebrow">CONTACT FORM</span>
+              <h2>How can we reach you?</h2>
+              <p>Fields marked <span aria-hidden="true">*</span> are required.</p>
+            </div>
+            <div class="form-fields">
+              <label class="form-field" for="first-name">
+                <span>First name <b aria-hidden="true">*</b></span>
+                <input id="first-name" name="firstName" type="text" autocomplete="given-name" placeholder="Jane" required />
+              </label>
+              <label class="form-field" for="last-name">
+                <span>Last name <b aria-hidden="true">*</b></span>
+                <input id="last-name" name="lastName" type="text" autocomplete="family-name" placeholder="Smith" required />
+              </label>
+              <label class="form-field form-field-wide" for="email">
+                <span>Email address <b aria-hidden="true">*</b></span>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="jane@company.com" required />
+              </label>
+              <label class="form-field form-field-wide" for="contact-number">
+                <span>Contact number <b aria-hidden="true">*</b></span>
+                <input id="contact-number" name="contactNumber" type="tel" autocomplete="tel" inputmode="tel" placeholder="+1 555 123 4567" title="Enter a phone number with 7 to 15 digits." required />
+              </label>
+              <label class="form-field form-field-wide" for="message">
+                <span>How can we help? <small>(optional)</small></span>
+                <textarea id="message" name="message" rows="4" placeholder="Tell us a little about your project or test requirements."></textarea>
+              </label>
+            </div>
+            <button class="button button-primary contact-submit" type="submit">Continue to email <span aria-hidden="true">↗</span></button>
+            <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+            <p class="form-footnote">Submitting opens your email app with this information prefilled. You’ll review and send the message from there.</p>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-main">
+        <div class="footer-brand"><a class="brand" href="index.html"><img class="brand-logo" src="assets/novel-solutions-mark.png" alt="" aria-hidden="true" /><span>Novel Solutions</span></a><p>Semiconductor test engineering and technical services.</p></div>
+        <div class="footer-column"><strong>EXPLORE</strong><a href="index.html">Home</a><a href="products.html">Products</a><a href="engineering.html">Engineering</a></div>
+        <div class="footer-column"><strong>INFORMATION</strong><a href="faq.html">FAQ</a><a href="contact.html" aria-current="page">Contact us</a></div>
+        <a class="back-top" href="#top" aria-label="Back to top">↑</a>
+      </div>
+      <div class="container footer-bottom"><span>© <span id="year"></span> Novel Solutions Corporation</span><span>Built on precision <span class="footer-heart">♥</span> driven by innovation.</span></div>
+    </footer>
+  </body>
+</html>
