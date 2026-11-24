@@ -35,18 +35,89 @@ window.addEventListener(
 
 document.querySelector("#year").textContent = new Date().getFullYear();
 
+const slideshow = document.querySelector(".semiconductor-slideshow");
+
+if (slideshow) {
+  const slides = [...slideshow.querySelectorAll(".slideshow-slide")];
+  const dots = [...slideshow.querySelectorAll(".slideshow-dots button")];
+  const previousButton = slideshow.querySelector(".slideshow-prev");
+  const nextButton = slideshow.querySelector(".slideshow-next");
+  let currentSlide = 0;
+  let slideshowTimer;
+
+  const showSlide = (index) => {
+    currentSlide = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("active", slideIndex === currentSlide);
+    });
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === currentSlide;
+      dot.classList.toggle("active", isActive);
+      dot.toggleAttribute("aria-current", isActive);
+    });
+  };
+
+  const restartTimer = () => {
+    window.clearInterval(slideshowTimer);
+    slideshowTimer = window.setInterval(() => showSlide(currentSlide + 1), 5000);
+  };
+
+  previousButton.addEventListener("click", () => {
+    showSlide(currentSlide - 1);
+    restartTimer();
+  });
+
+  nextButton.addEventListener("click", () => {
+    showSlide(currentSlide + 1);
+    restartTimer();
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showSlide(index);
+      restartTimer();
+    });
+  });
+
+  const lightbox = document.querySelector(".slideshow-lightbox");
+  const lightboxImage = lightbox?.querySelector("img");
+  const lightboxClose = lightbox?.querySelector(".lightbox-close");
+  const lightboxPrevious = lightbox?.querySelector(".lightbox-prev");
+  const lightboxNext = lightbox?.querySelector(".lightbox-next");
+
+  const showExpandedImage = (index) => {
+    showSlide(index);
+    lightboxImage.src = slides[currentSlide].querySelector("img").src;
+    lightboxImage.alt = slides[currentSlide].querySelector("img").alt;
+  };
+
+  slideshow.querySelector(".slideshow-track").addEventListener("click", () => {
+    showExpandedImage(currentSlide);
+    window.clearInterval(slideshowTimer);
+    if (typeof lightbox.showModal === "function") {
+      lightbox.showModal();
+    } else {
+      lightbox.setAttribute("open", "");
+    }
+  });
+
+  lightboxClose?.addEventListener("click", () => lightbox.close());
+  lightboxPrevious?.addEventListener("click", () => showExpandedImage(currentSlide - 1));
+  lightboxNext?.addEventListener("click", () => showExpandedImage(currentSlide + 1));
+  lightbox?.addEventListener("click", (event) => {
+    if (event.target === lightbox) lightbox.close();
+  });
+  lightbox?.addEventListener("close", restartTimer);
+
+  slideshow.addEventListener("mouseenter", () => window.clearInterval(slideshowTimer));
+  slideshow.addEventListener("mouseleave", restartTimer);
+  restartTimer();
+}
+
 const contactForm = document.querySelector("#contact-form");
 
 contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();
-
-  const phoneInput = contactForm.elements.namedItem("contactNumber");
-  const phoneDigits = phoneInput.value.replace(/\D/g, "");
-  phoneInput.setCustomValidity(
-    phoneDigits.length >= 7 && phoneDigits.length <= 15
-      ? ""
-      : "Enter a phone number with 7 to 15 digits.",
-  );
 
   if (!contactForm.reportValidity()) return;
 
@@ -54,24 +125,13 @@ contactForm?.addEventListener("submit", (event) => {
   const message = [
     `Name: ${formData.get("firstName")} ${formData.get("lastName")}`,
     `Email: ${formData.get("email")}`,
-    `Contact number: ${formData.get("contactNumber")}`,
     "",
     `Message: ${formData.get("message") || "No additional message provided."}`,
   ].join("\n");
   const subject = `Website inquiry from ${formData.get("firstName")} ${formData.get("lastName")}`;
-  const emailLink = `mailto:info@novelsolutions.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+  const emailLink = `mailto:customer_service@novelsolutions.tech?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
   const status = document.querySelector("#contact-status");
 
   status.textContent = "Opening your email app. Review and send the message there to complete your inquiry.";
   window.location.href = emailLink;
-});
-
-contactForm?.elements.namedItem("contactNumber").addEventListener("input", (event) => {
-  const phoneDigits = event.currentTarget.value.replace(/\D/g, "");
-  event.currentTarget.setCustomValidity(
-    !event.currentTarget.value ||
-      (phoneDigits.length >= 7 && phoneDigits.length <= 15)
-      ? ""
-      : "Enter a phone number with 7 to 15 digits.",
-  );
 });
